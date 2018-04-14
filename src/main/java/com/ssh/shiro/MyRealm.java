@@ -23,13 +23,14 @@ public class MyRealm extends AuthorizingRealm{
 
     // 为当前登陆成功的用户授予权限和角色，已经登陆成功了
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         return null;
     }
 
     // 验证当前登录的用户，获取认证信息
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String username = (String)token.getCredentials();
         return null;
     }
 

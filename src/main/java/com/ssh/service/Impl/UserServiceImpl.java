@@ -4,6 +4,7 @@ package com.ssh.service.Impl;
 import com.ssh.dao.SysUserDao;
 import com.ssh.entity.SysUserEntity;
 import com.ssh.service.UserService;
+import com.ssh.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @VERSION 1.0
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<SysUserEntity> implements UserService{
 
     @Autowired
     private SysUserDao sysUserDao;

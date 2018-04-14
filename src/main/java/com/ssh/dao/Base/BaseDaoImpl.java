@@ -25,14 +25,38 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
     protected SessionFactory sessionFactory;
     protected Class<T> Classz;
 
+
+
+
+    /***********srpingdata jpa******************************************************************************/
+
+
+
+
+    /***********JdbcTemplate jpa******************************************************************************/
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
+
+    @Override
+    public List getDateBysqlTemplate(String sql) {
+        return null;
+    }
+
+    @Override
+    public <T> List<T> getDateBysqlTemplate(Class<T> entityClass, String sql) {
+        return null;
+    }
+
+
+
+    /***********hibernate jpa******************************************************************************/
     @Resource(name="sessionFactory")
     public void setHibernateSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
-
-    @Autowired
-    protected JdbcTemplate jdbcTemplate;
+    protected Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
 
     @Override
@@ -56,12 +80,17 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
     @Override
     public void delete(T entity) {
         getSession().delete(entity);
+        getSession().flush();
     }
 
     @Override
     public void update(T entity) {
         getSession().update(entity);
+        getSession().flush();
     }
+    /************hibernate jpa end*************************************************************************************/
+
+
 
     @Override
     public List getDateByHqlTemplate(String hql) {
@@ -73,48 +102,17 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
         return null;
     }
 
-    @Override
-    public List getDateBysqlTemplate(String sql) {
-        return null;
-    }
-
-    @Override
-    public <T> List<T> getDateBysqlTemplate(Class<T> entityClass, String sql) {
-        return null;
-    }
 
 
-//    @Override
-//    public List getDateByHqlTemplate(String hql) {
-//        Query query = getSession().createQuery(hql);
-//        return query.getResultList();
-//    }
-//
-//    @Override
-//    public <T> List<T> getDateByHqlTemplate(Class<T> entityClass, String Hql) {
-//        Query<T> query = getSession().createQuery(Hql, entityClass);
-//        return query.getResultList();
-//    }
-//
-//    @Override
-//    public List getDateBysqlTemplate(String sql) {
-//        NativeQuery sqlQuery = getSession().createSQLQuery(sql);
-//        return sqlQuery.getResultList();
-//    }
-//
-//    @Override
-//    public <T> List<T> getDateBysqlTemplate(Class<T> entityClass, String sql) {
-//        List<T> list = new ArrayList<T>();
-//        list = jdbcTemplate.query(sql, new BeanPropertyRowMapper(entityClass));
-//        return list;
-//    }
+
+
+
+
+
 
 
 
     /************************************************************/
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
 
     public BaseDaoImpl() {
         // 通过反射机制获取子类传递过来的实体类的类型信息

@@ -32,4 +32,19 @@ public class TestController {
         return admin;
     }
 
+
+    @GetMapping("/test3")
+    public void testdemo3(){
+        SysUserEntity admin2 = new SysUserEntity(2, "admin2", "123456", "1", 0);
+        userService.save(admin2);
+    }
+
+
+    @GetMapping("/test4")
+    public void testdemo4(){
+        SysUserEntity admin = userService.getSysUserByName("admin2");
+        admin.setPassword("111111111");
+        userService.update(admin);
+    }
+
 }

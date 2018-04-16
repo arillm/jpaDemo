@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/user/dologin" method="post">
+    <form action="/user/dologin2" method="post">
         <input type="text" name="sysUser" />
         <input type="text" name="password" />
         <input type="submit" value="登陆" />
